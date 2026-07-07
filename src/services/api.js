@@ -2,9 +2,9 @@ import axios from 'axios'
 
 axios.defaults.withCredentials = true
 axios.defaults.withXSRFToken = true
-axios.defaults.baseURL =
+axios.defaults.baseURL = import.meta.env.VITE_API_URL
 
-const BACKEND_URL = import.meta.env.VITE_API_URL;
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
 
 // 🌟 INTERCEPTOR GLOBAL
 axios.interceptors.response.use(
