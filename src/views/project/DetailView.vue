@@ -2,25 +2,25 @@
 import WrapperComponent from '@/components/WrapperComponent.vue'
 import { useRoute } from 'vue-router'
 import { onMounted, ref } from 'vue'
-import { useUserStore } from '@/stores/user'
+import { useProjectStore } from '@/stores/project'
 
 const route = useRoute()
-const userStore = useUserStore()
-const user = ref(null)
+const projectStore = useProjectStore()
+const project = ref(null)
 
 onMounted(async () => {
-  await userStore.init()
-  user.value = userStore.get(route.params.id)
+  await projectStore.init()
+  project.value = projectStore.get(route.params.id)
 })
 </script>
 
 <template>
-  <WrapperComponent :error="userStore.error">
+  <WrapperComponent :error="projectStore.error">
     <h1>Hola, me alegra verte por aqui!</h1>
     <p>mira mis codigos</p>
-    <p v-if="userStore.isLoading">carregando</p>
+    <p v-if="userStore?.isLoading">carregando</p>
     <code v-else>
-      {{ user }}
+      {{ project }}
     </code>
   </WrapperComponent>
 </template>

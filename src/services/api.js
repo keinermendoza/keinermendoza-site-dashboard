@@ -2,9 +2,9 @@ import axios from 'axios'
 
 axios.defaults.withCredentials = true
 axios.defaults.withXSRFToken = true
-axios.defaults.baseURL = 'http://localhost:8000/api/v1/'
+axios.defaults.baseURL =
 
-const BACKEND_URL = 'http://localhost:8000'
+const BACKEND_URL = import.meta.env.VITE_API_URL;
 
 // 🌟 INTERCEPTOR GLOBAL
 axios.interceptors.response.use(
@@ -64,17 +64,21 @@ const patchRequest = async (endpoint, data) => {
 const deleteRequest = async (endpoint) => {
   try {
     await axios.delete(endpoint)
-    return { error: null }
+    return { error: null, success: true }
   } catch (err) {
-    return { error: err.response?.dara?.message || err.message }
+    return { error: err.response?.dara?.message || err.message, success: false }
   }
 }
 
 function handleDataResponse(response) {
-  return { data: response.data, error: null }
+  return { data: response.data.data, error: null, success: true }
 }
 
 function handleErrorResponse(err) {
-  return { data: null, error: err.response?.data?.message || err.message }
+  return {
+    data: null,
+    error: err.response?.data?.errors || { generalMessage: err.message },
+    success: false,
+  }
 }
-export { getUser, getRequest, postRequest, patchRequest, deleteRequest }
+export { axios, getUser, getRequest, postRequest, patchRequest, deleteRequest }

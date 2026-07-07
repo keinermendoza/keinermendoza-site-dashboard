@@ -1,77 +1,78 @@
 <script setup>
-import { useUserStore } from '@/stores/user'
 import WrapperComponent from '@/components/WrapperComponent.vue'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import { onMounted } from 'vue'
 import { Button } from 'primevue'
-import Dialog from 'primevue/dialog'
-import { ref } from 'vue'
-import { deleteRequest } from '@/services/api'
+import { useTagStore } from '@/stores/tag'
 import IsSvg from '@/components/IsSvg.vue'
 
-const deleteModalIsVisible = ref(false)
-const userStore = useUserStore()
-const selectedUser = ref(null)
+// import Dialog from 'primevue/dialog'
+// import { ref } from 'vue'
+// import { deleteRequest } from '@/services/api'
 
-function selectUserForDeletion(userId) {
-  selectedUser.value = userStore.get(userId)
-  deleteModalIsVisible.value = true
-}
+// const deleteModalIsVisible = ref(false)
+// const selectedUser = ref(null)
+const store = useTagStore()
 
-async function requestUserDeletion() {
-  const { success } = await deleteRequest('users/' + selectedUser.value.id)
-  if (success) userStore.remove(selectedUser.value.id)
-  deleteModalIsVisible.value = false
-}
+// function selectUserForDeletion(userId) {
+//   selectedUser.value = store.get(userId)
+//   deleteModalIsVisible.value = true
+// }
+
+// async function requestUserDeletion() {
+//   const { success } = await deleteRequest('users/' + selectedUser.value.id)
+//   if (success) store.remove(selectedUser.value.id)
+//   deleteModalIsVisible.value = false
+// }
 
 onMounted(() => {
-  userStore.init()
+  store.init()
 })
 </script>
 
 <template>
-  <WrapperComponent :error="userStore.error">
+  <WrapperComponent :error="store.error">
     <h1>Hola, me alegra verte por aqui!</h1>
-    <p v-if="userStore.isLoading">carregando</p>
-    <DataTable v-else :value="userStore.users" tableStyle="min-width: 50rem">
+    <p v-if="store.isLoading">carregando</p>
+    <DataTable v-else :value="store.tags" tableStyle="min-width: 50rem">
       <template #header>
         <div class="flex flex-wrap items-center justify-between gap-2">
-          <span class="text-xl font-bold">Usuarios</span>
+          <span class="text-xl font-bold">Projetos</span>
           <Button
             icon="pi pi-refresh"
             as="router-link"
-            :to="{ name: 'user-create' }"
+            :to="{ name: 'tag-create' }"
             label="Cadastrar Novo"
             rounded
             raised
           />
         </div>
       </template>
-      <Column field="name" header="Nome"></Column>
-      <Column field="email" header="E-mail"></Column>
-      <Column header="Administrador">
+      <Column field="title" header="Titulo"></Column>
+      <Column field="description" header="Descrição"></Column>
+      <Column header="É público">
         <template #body="slotProps">
-          <IsSvg :is="slotProps.data.is_admin" />
+          <IsSvg :is="slotProps.data.is_public" />
         </template>
       </Column>
-      <Column field="created_at" header="Cadastrado em"></Column>
-      <Column field="updated_at" header="Atualizado em"></Column>
+      <!-- <Column field="created_at" header="Cadastrado em"></Column>
+      <Column field="updated_at" header="Atualizado em"></Column> -->
       <Column header="Ações">
         <template #body="slotProps">
           <div class="flex gap-2 items-center">
-            <RouterLink :to="{ name: 'user-detail', params: { id: slotProps.data.id } }"
+            <RouterLink :to="{ name: 'tag-detail', params: { id: slotProps.data.id } }"
               >ver</RouterLink
             >
-            <RouterLink :to="{ name: 'user-edit', params: { id: slotProps.data.id } }"
+            <RouterLink :to="{ name: 'tag-edit', params: { id: slotProps.data.id } }"
               >editar</RouterLink
             >
-            <Button label="Eliminar" @click="selectUserForDeletion(slotProps.data.id)" />
+            <!-- <Button label="Eliminar" @click="selectUserForDeletion(slotProps.data.id)" /> -->
           </div>
         </template>
       </Column>
     </DataTable>
-
+    <!--
     <div class="card flex justify-center">
       <Dialog
         v-model:visible="deleteModalIsVisible"
@@ -93,6 +94,6 @@ onMounted(() => {
           <Button type="button" label="Deletar" @click="requestUserDeletion()"></Button>
         </div>
       </Dialog>
-    </div>
+    </div> -->
   </WrapperComponent>
 </template>
