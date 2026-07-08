@@ -7,9 +7,9 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  build: {
-    cssMinify: false,
-  },
+  // build: {
+  //   cssMinify: false,
+  // },
   plugins: [vue(), vueDevTools(), tailwindcss()],
   resolve: {
     alias: {
