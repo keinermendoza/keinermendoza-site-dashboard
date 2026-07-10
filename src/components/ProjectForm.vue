@@ -5,7 +5,8 @@ import { Message, InputText, Button } from 'primevue'
 import ToggleSwitch from 'primevue/toggleswitch'
 import MessageError from '@/components/MessageError.vue'
 import MultiSelect from 'primevue/multiselect'
-import TinyEditor from '@/components/TinyEditor.vue'
+// import TinyEditor from '@/components/TinyEditor.vue'
+import TipTapEditor from './TipTapEditor.vue'
 
 const props = defineProps({
   initialValues: {
@@ -37,8 +38,10 @@ const formValues = reactive({
   ...props.initialValues,
 })
 const editorContent = ref(props.initialValues.content)
+console.log(editorContent.value)
 
 const onFormSubmit = async ({ values }) => {
+  console.log(editorContent.value)
   values['content'] = editorContent.value
   emit('onSubmit', values)
 }
@@ -145,8 +148,7 @@ const resolver = ({ values }) => {
       </div>
       <!-- Conteudo -->
       <div class="flex flex-col gap-1">
-        <TinyEditor v-model="editorContent" />
-        <!-- <InputText name="content" type="text" placeholder="content" fluid /> -->
+        <TipTapEditor v-model="editorContent" />
         <MessageError :form="$form" :backendErrors="backendErrors" fieldName="content" />
       </div>
 

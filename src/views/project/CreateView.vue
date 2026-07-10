@@ -50,5 +50,5 @@ async function handleSubmit(payload) {
       @onSubmit="handleSubmit"
     />
   </div>
-  <ImageGallerySelector v-model:selectedImage="image" v-model:isOpen="imagesModalIsOpen" />
+  <ImageGallerySelector v-model:isOpen="imagesModalIsOpen" @update:selectedImage="image = $event" />
 </template>
