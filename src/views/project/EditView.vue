@@ -4,9 +4,9 @@ import { useProjectStore } from '@/stores/project'
 import { useTagStore } from '@/stores/tag'
 import { useRoute, useRouter } from 'vue-router'
 import { patchRequest } from '@/services/api'
-import ProjectForm from '@/components/ProjectForm.vue'
+import ProjectForm from '@/components/forms/ProjectForm.vue'
 import ImageGallerySelector from '@/components/ImageGallerySelector.vue'
-
+import LinkBack from '@/components/LinkBack.vue'
 const route = useRoute()
 const router = useRouter()
 
@@ -44,21 +44,21 @@ async function handleSubmit(payload) {
 </script>
 
 <template>
-  <div class="card flex justify-center">
-    <div>
-      <h1 v-if="project">Editando porjeto {{ project.title }}</h1>
-    </div>
-    <ProjectForm
-      v-if="project"
-      :initialValues="project"
-      :backendErrors="backendErrors"
-      :availableTags="tagStore?.data"
-      :selectedImage="image"
-      v-model:selectedTags="selectedTags"
-      @onOpenImageModal="imagesModalIsOpen = true"
-      @onSubmit="handleSubmit"
-    />
+  <LinkBack class="mb-4" />
+
+  <div>
+    <h1 v-if="project">Editando porjeto {{ project.title }}</h1>
   </div>
+  <ProjectForm
+    v-if="project"
+    :initialValues="project"
+    :backendErrors="backendErrors"
+    :availableTags="tagStore?.data"
+    :selectedImage="image"
+    v-model:selectedTags="selectedTags"
+    @onOpenImageModal="imagesModalIsOpen = true"
+    @onSubmit="handleSubmit"
+  />
   <ImageGallerySelector
     :selectedImage="image"
     v-model:isOpen="imagesModalIsOpen"

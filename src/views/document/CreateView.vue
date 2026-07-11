@@ -2,7 +2,8 @@
 import { onMounted, ref } from 'vue'
 import { useImageStore } from '@/stores/image'
 import { postRequest } from '@/services/api'
-import DocumentForm from '@/components/DocumentForm.vue'
+import DocumentForm from '@/components/forms/DocumentForm.vue'
+import LinkBack from '@/components/LinkBack.vue'
 
 const store = useImageStore()
 const backendErrors = ref(null)
@@ -19,10 +20,9 @@ async function handleSubmit(payload) {
 </script>
 
 <template>
-  <div class="card flex justify-center">
-    <div>
-      <h1>Subir Novo Documento</h1>
-    </div>
-    <DocumentForm :backendErrors="backendErrors" @submit="handleSubmit" />
+  <LinkBack class="mb-4" />
+  <div>
+    <h1>Subir Novo Documento</h1>
   </div>
+  <DocumentForm :backendErrors="backendErrors" @submit="handleSubmit" />
 </template>

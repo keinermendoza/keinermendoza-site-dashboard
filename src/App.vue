@@ -1,22 +1,27 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
+import LayoutApp from './components/LayoutApp.vue'
+import SidebarItem from './components/SidebarItem.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <LayoutApp>
+    <template #sidebar>
+      <SidebarItem to="/"> Home </SidebarItem>
 
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/users">Usuarios</RouterLink>
-        <RouterLink to="/image-gallery">Galeria de Imagens</RouterLink>
-        <RouterLink to="/projects">Projetos</RouterLink>
-        <RouterLink to="/tags">Categorias</RouterLink>
-        <RouterLink to="/documents">Documentos</RouterLink>
-      </nav>
-    </div>
-  </header>
+      <SidebarItem to="/users"> Usuarios </SidebarItem>
 
-  <RouterView />
+      <SidebarItem to="/image-gallery"> Galeria de Imagens </SidebarItem>
+
+      <SidebarItem to="/projects"> Projetos </SidebarItem>
+
+      <SidebarItem to="/tags"> Categorias </SidebarItem>
+
+      <SidebarItem to="/documents"> Documentos </SidebarItem>
+
+      <SidebarItem to="/skills"> Skills </SidebarItem>
+    </template>
+
+    <RouterView />
+  </LayoutApp>
 </template>

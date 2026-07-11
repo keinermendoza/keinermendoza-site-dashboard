@@ -36,7 +36,7 @@ onMounted(() => {
     <DataTable v-else :value="store.data" tableStyle="min-width: 50rem">
       <template #header>
         <div class="flex flex-wrap items-center justify-between gap-2">
-          <span class="text-xl font-bold">Usuarios</span>
+          <span class="text-xl font-bold">Documentos</span>
           <Button
             icon="pi pi-refresh"
             as="router-link"

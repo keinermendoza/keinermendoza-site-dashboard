@@ -4,7 +4,7 @@ import { Button } from 'primevue'
 import Dialog from 'primevue/dialog'
 import WrapperComponent from '@/components/WrapperComponent.vue'
 import { useImageStore } from '@/stores/image'
-import ImageForm from './ImageForm.vue'
+import ImageForm from './forms/ImageForm.vue'
 import { postRequest } from '@/services/api.js'
 
 const props = defineProps({

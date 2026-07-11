@@ -80,6 +80,6 @@ const onFormSubmit = async ({ valid, values }) => {
       </label>
       <MessageError :form="$form" :backendErrors="props?.backendErrors" fieldName="is_admin" />
     </div>
-    <Button type="submit" severity="secondary" label="Submit" />
+    <Button type="submit" severity="primary" label="Submit" />
   </Form>
 </template>

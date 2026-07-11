@@ -47,8 +47,7 @@ onMounted(() => {
 
 <template>
   <WrapperComponent :error="store.error">
-    <h1>Hola, me alegra verte por aqui!</h1>
-    <p v-if="store.isLoading">carregando</p>
+    <p v-if="store.isLoading">carregando...</p>
     <DataTable v-else :value="store.projects" tableStyle="min-width: 50rem">
       <template #header>
         <div class="flex flex-wrap items-center justify-between gap-2">

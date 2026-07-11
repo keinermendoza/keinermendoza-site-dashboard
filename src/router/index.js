@@ -1,6 +1,48 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 
+import {
+  ListView as UserList,
+  DetailView as UserDetail,
+  CreateView as UserCreate,
+  EditView as UserEdit,
+} from '@/views/user'
+
+import {
+  ListView as ProjectList,
+  DetailView as ProjectDetail,
+  CreateView as ProjectCreate,
+  EditView as ProjectEdit,
+} from '@/views/project'
+
+import {
+  ListView as TagList,
+  DetailView as TagDetail,
+  CreateView as TagCreate,
+  EditView as TagEdit,
+} from '@/views/tag'
+
+import {
+  ListView as SkillList,
+  DetailView as SkillDetail,
+  CreateView as SkillCreate,
+  EditView as SkillEdit,
+} from '@/views/tag'
+
+import {
+  ListView as ImageList,
+  DetailView as ImageDetail,
+  CreateView as ImageCreate,
+  EditView as ImageEdit,
+} from '@/views/image'
+
+import {
+  ListView as DocumentList,
+  DetailView as DocumentDetail,
+  CreateView as DocumentCreate,
+  EditView as DocumentEdit,
+} from '@/views/document'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -15,23 +57,22 @@ const router = createRouter({
         {
           path: '',
           name: 'user-list',
-          component: () => import('@/views/user/ListView.vue'),
+          component: UserList,
         },
         {
           path: 'create',
           name: 'user-create',
-          component: () => import('@/views/user/FormView.vue'),
+          component: UserCreate,
         },
         {
           path: ':id',
           name: 'user-detail',
-          component: () => import('@/views/user/DetailView.vue'),
+          component: UserDetail,
         },
         {
           path: ':id/edit',
           name: 'user-edit',
-          component: () => import('@/views/user/FormView.vue'),
-          props: { isEditMode: true },
+          component: UserEdit,
         },
       ],
     },
@@ -41,23 +82,22 @@ const router = createRouter({
         {
           path: '',
           name: 'skill-list',
-          component: () => import('@/views/skill/ListView.vue'),
+          component: SkillList,
         },
         {
           path: 'create',
           name: 'skill-create',
-          component: () => import('@/views/skill/FormView.vue'),
+          component: SkillCreate,
         },
         {
           path: ':id',
           name: 'skill-detail',
-          component: () => import('@/views/skill/DetailView.vue'),
+          component: SkillDetail,
         },
         {
           path: ':id/edit',
           name: 'skill-edit',
-          component: () => import('@/views/skill/FormView.vue'),
-          props: { isEditMode: true },
+          component: SkillEdit,
         },
       ],
     },
@@ -67,22 +107,22 @@ const router = createRouter({
         {
           path: '',
           name: 'project-list',
-          component: () => import('@/views/project/ListView.vue'),
+          component: ProjectList,
         },
         {
           path: 'create',
           name: 'project-create',
-          component: () => import('@/views/project/CreateView.vue'),
+          component: ProjectCreate,
         },
         {
           path: ':id',
           name: 'project-detail',
-          component: () => import('@/views/project/DetailView.vue'),
+          component: ProjectDetail,
         },
         {
           path: ':id/edit',
           name: 'project-edit',
-          component: () => import('@/views/project/EditView.vue'),
+          component: ProjectEdit,
         },
       ],
     },
@@ -92,23 +132,22 @@ const router = createRouter({
         {
           path: '',
           name: 'tag-list',
-          component: () => import('@/views/tag/ListView.vue'),
+          component: TagList,
         },
         {
           path: 'create',
           name: 'tag-create',
-          component: () => import('@/views/tag/FormView.vue'),
+          component: TagCreate,
         },
         {
           path: ':id',
           name: 'tag-detail',
-          component: () => import('@/views/tag/DetailView.vue'),
+          component: TagDetail,
         },
         {
           path: ':id/edit',
           name: 'tag-edit',
-          component: () => import('@/views/tag/FormView.vue'),
-          props: { isEditMode: true },
+          component: TagEdit,
         },
       ],
     },
@@ -118,23 +157,22 @@ const router = createRouter({
         {
           path: '',
           name: 'image-gallery',
-          component: () => import('@/views/image/ListView.vue'),
+          component: ImageList,
         },
         {
           path: 'create',
           name: 'image-gallery-create',
-          component: () => import('@/views/image/CreateView.vue'),
+          component: ImageCreate,
         },
         {
           path: ':id',
           name: 'image-gallery-detail',
-          component: () => import('@/views/image/DetailView.vue'),
+          component: ImageDetail,
         },
         {
           path: ':id/edit',
           name: 'image-gallery-edit',
-          component: () => import('@/views/image/EditView.vue'),
-          // props: { isEditMode: true },
+          component: ImageEdit,
         },
       ],
     },
@@ -145,30 +183,24 @@ const router = createRouter({
         {
           path: '',
           name: 'document',
-          component: () => import('@/views/document/ListView.vue'),
+          component: DocumentList,
         },
         {
           path: 'create',
           name: 'document-create',
-          component: () => import('@/views/document/CreateView.vue'),
+          component: DocumentCreate,
         },
         {
           path: ':id',
           name: 'document-detail',
-          component: () => import('@/views/document/DetailView.vue'),
+          component: DocumentDetail,
         },
         {
           path: ':id/edit',
           name: 'document-edit',
-          component: () => import('@/views/document/EditView.vue'),
-          // props: { isEditMode: true },
+          component: DocumentEdit,
         },
       ],
-    },
-    {
-      path: '/about',
-      name: 'about',
-      component: () => import('../views/AboutView.vue'),
     },
   ],
 })

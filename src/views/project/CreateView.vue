@@ -4,8 +4,9 @@ import { useProjectStore } from '@/stores/project'
 import { useTagStore } from '@/stores/tag'
 import { useRouter } from 'vue-router'
 import { postRequest } from '@/services/api'
-import ProjectForm from '@/components/ProjectForm.vue'
+import ProjectForm from '@/components/forms/ProjectForm.vue'
 import ImageGallerySelector from '@/components/ImageGallerySelector.vue'
+import LinkBack from '@/components/LinkBack.vue'
 
 const router = useRouter()
 const store = useProjectStore()
@@ -37,18 +38,18 @@ async function handleSubmit(payload) {
 </script>
 
 <template>
-  <div class="card flex justify-center">
-    <div>
-      <h1>Novo Porjeto</h1>
-    </div>
-    <ProjectForm
-      :backendErrors="backendErrors"
-      :availableTags="tagStore?.data"
-      :selectedImage="image"
-      v-model:selectedTags="selectedTags"
-      @onOpenImageModal="imagesModalIsOpen = true"
-      @onSubmit="handleSubmit"
-    />
+  <LinkBack class="mb-4" />
+
+  <div>
+    <h1>Novo Porjeto</h1>
   </div>
+  <ProjectForm
+    :backendErrors="backendErrors"
+    :availableTags="tagStore?.data"
+    :selectedImage="image"
+    v-model:selectedTags="selectedTags"
+    @onOpenImageModal="imagesModalIsOpen = true"
+    @onSubmit="handleSubmit"
+  />
   <ImageGallerySelector v-model:isOpen="imagesModalIsOpen" @update:selectedImage="image = $event" />
 </template>

@@ -32,11 +32,11 @@ onMounted(() => {
 
 <template>
   <WrapperComponent :error="imageStore.error">
-    <p v-if="imageStore.isLoading">carregando</p>
+    <p v-if="imageStore.isLoading">carregando...</p>
     <DataTable v-else :value="imageStore.images" tableStyle="min-width: 50rem">
       <template #header>
         <div class="flex flex-wrap items-center justify-between gap-2">
-          <span class="text-xl font-bold">Usuarios</span>
+          <span class="text-xl font-bold">Galeria de Imagens</span>
           <Button
             icon="pi pi-refresh"
             as="router-link"

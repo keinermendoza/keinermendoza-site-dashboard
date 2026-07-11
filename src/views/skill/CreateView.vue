@@ -1,12 +1,13 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import { useUserStore } from '@/stores/user'
+import { useSkillStore } from '@/stores/skill'
 import { postRequest } from '@/services/api'
-import DocumentForm from '@/components/forms/DocumentForm.vue'
+import SkillForm from '@/components/forms/SkillForm.vue'
 import { useRouter } from 'vue-router'
 import LinkBack from '@/components/LinkBack.vue'
+
 const router = useRouter()
-const store = useUserStore()
+const store = useSkillStore()
 const backendErrors = ref(null)
 
 onMounted(async () => {
@@ -14,11 +15,12 @@ onMounted(async () => {
 })
 
 async function handleSubmit(payload) {
-  const response = await postRequest('users', payload)
+  console.log(payload)
+  const response = await postRequest('skills', payload)
   backendErrors.value = response.error
   if (response.success) {
     store.add(response.data)
-    router.push({ name: 'user-edit', params: { id: response.data.id } })
+    router.push({ name: 'skill-edit', params: { id: response.data.id } })
   }
 }
 </script>
@@ -27,7 +29,7 @@ async function handleSubmit(payload) {
   <LinkBack class="mb-4" />
 
   <div>
-    <h1>Subir Novo Documento</h1>
+    <h1>Nova Habilidade Destacada (Skill)</h1>
   </div>
-  <DocumentForm :backendErrors="backendErrors" @onSubmit="handleSubmit" />
+  <SkillForm :backendErrors="backendErrors" @onSubmit="handleSubmit" />
 </template>

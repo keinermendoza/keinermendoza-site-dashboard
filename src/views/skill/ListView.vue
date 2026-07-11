@@ -6,7 +6,7 @@ import Column from 'primevue/column'
 import { onMounted } from 'vue'
 import { Button } from 'primevue'
 // import Dialog from 'primevue/dialog'
-import { ref } from 'vue'
+// import { ref } from 'vue'
 // import { deleteRequest } from '@/services/api'
 import IsSvg from '@/components/IsSvg.vue'
 
@@ -32,8 +32,7 @@ onMounted(() => {
 
 <template>
   <WrapperComponent :error="store.error">
-    <h1>Hola, me alegra verte por aqui!</h1>
-    <p v-if="store.isLoading">carregando</p>
+    <p v-if="store.isLoading">carregando...</p>
     <DataTable v-else :value="store.skills" tableStyle="min-width: 50rem">
       <template #header>
         <div class="flex flex-wrap items-center justify-between gap-2">

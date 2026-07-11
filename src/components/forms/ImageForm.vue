@@ -64,6 +64,6 @@ const onFormSubmit = async ({ values }) => {
       <InputText name="description" type="text" placeholder="description" fluid />
       <MessageError :form="$form" :backendErrors="props?.backendErrors" fieldName="description" />
     </div>
-    <Button type="submit" severity="secondary" label="Submit" />
+    <Button type="submit" severity="primary" label="Submit" />
   </Form>
 </template>

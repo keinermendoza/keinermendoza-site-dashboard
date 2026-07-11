@@ -3,8 +3,10 @@ import { onMounted, ref } from 'vue'
 import { useDocumentStore } from '@/stores/document'
 import { useRoute } from 'vue-router'
 import { patchRequest } from '@/services/api'
-import DocumentForm from '@/components/DocumentForm.vue'
+import DocumentForm from '@/components/forms/DocumentForm.vue'
 import { Button } from 'primevue'
+import LinkBack from '@/components/LinkBack.vue'
+
 const route = useRoute()
 const store = useDocumentStore()
 const instance = ref(null)
@@ -23,16 +25,16 @@ async function handleSubmit(payload) {
 </script>
 
 <template>
-  <div class="card flex justify-center">
-    <div v-if="instance">
-      <h1>Editando {{ instance.title }}</h1>
-      <Button as="a" :href="instance?.file" severity="primary" label="Baixar documento" />
-    </div>
-    <DocumentForm
-      v-if="instance"
-      :initialValues="instance"
-      :backendErrors="backendErrors"
-      @submit="handleSubmit"
-    />
+  <LinkBack class="mb-4" />
+
+  <div v-if="instance">
+    <h1>Editando {{ instance.title }}</h1>
+    <Button as="a" :href="instance?.file" severity="primary" label="Baixar documento" />
   </div>
+  <DocumentForm
+    v-if="instance"
+    :initialValues="instance"
+    :backendErrors="backendErrors"
+    @submit="handleSubmit"
+  />
 </template>

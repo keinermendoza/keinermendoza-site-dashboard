@@ -2,7 +2,8 @@
 import { onMounted, ref } from 'vue'
 import { useImageStore } from '@/stores/image'
 import { postRequest } from '@/services/api'
-import ImageForm from '@/components/ImageForm.vue'
+import ImageForm from '@/components/forms/ImageForm.vue'
+import LinkBack from '@/components/LinkBack.vue'
 
 const store = useImageStore()
 const imagePreview = ref(null)
@@ -24,15 +25,15 @@ async function handleSubmit(payload) {
 </script>
 
 <template>
-  <div class="card flex justify-center">
-    <div>
-      <h1>Nova Imagem</h1>
-      <img v-if="imagePreview" :src="imagePreview" alt="Previsualização de imagem" />
-    </div>
-    <ImageForm
-      :backendErrors="backendErrors"
-      @submit="handleSubmit"
-      @onUpdateImagePreview="handleUpdatePreview"
-    />
+  <LinkBack class="mb-4" />
+
+  <div>
+    <h1>Nova Imagem</h1>
+    <img v-if="imagePreview" :src="imagePreview" alt="Previsualização de imagem" />
   </div>
+  <ImageForm
+    :backendErrors="backendErrors"
+    @submit="handleSubmit"
+    @onUpdateImagePreview="handleUpdatePreview"
+  />
 </template>

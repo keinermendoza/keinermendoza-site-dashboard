@@ -2,11 +2,12 @@
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { patchRequest } from '@/services/api'
-import UserForm from '@/components/forms/UserForm.vue'
-import { useUserStore } from '@/stores/user'
+import TagForm from '@/components/forms/TagForm.vue'
+import { useTagStore } from '@/stores/tag'
 import LinkBack from '@/components/LinkBack.vue'
+
 const route = useRoute()
-const store = useUserStore()
+const store = useTagStore()
 const instance = ref(null)
 const backendErrors = ref(null)
 
@@ -16,7 +17,7 @@ onMounted(async () => {
 })
 
 async function handleSubmit(payload) {
-  const response = await patchRequest('users/' + instance.value.id, payload)
+  const response = await patchRequest('tags/' + instance.value.id, payload)
   backendErrors.value = response.error
   if (response.success) store.update(response.data)
 }
@@ -28,7 +29,7 @@ async function handleSubmit(payload) {
   <div v-if="instance">
     <h1>Editando {{ instance.name }}</h1>
   </div>
-  <UserForm
+  <TagForm
     v-if="instance"
     :initialValues="instance"
     :backendErrors="backendErrors"

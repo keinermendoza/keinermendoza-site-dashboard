@@ -3,7 +3,8 @@ import { onMounted, ref } from 'vue'
 import { useImageStore } from '@/stores/image'
 import { useRoute } from 'vue-router'
 import { patchRequest } from '@/services/api'
-import ImageForm from '@/components/ImageForm.vue'
+import ImageForm from '@/components/forms/ImageForm.vue'
+import LinkBack from '@/components/LinkBack.vue'
 
 const route = useRoute()
 const store = useImageStore()
@@ -28,17 +29,17 @@ async function handleSubmit(payload) {
 </script>
 
 <template>
-  <div class="card flex justify-center">
-    <div>
-      <h1 v-if="selectedImage">Editando imagem # {{ selectedImage.id }}</h1>
-      <img v-if="imagePreview" :src="imagePreview" alt="Previsualização de imagem" />
-      <img v-else-if="selectedImage" :src="selectedImage.image" alt="Previsualização de imagem" />
-    </div>
-    <ImageForm
-      :initialValues="selectedImage"
-      :backendErrors="backendErrors"
-      @submit="handleSubmit"
-      @onUpdateImagePreview="handleUpdatePreview"
-    />
+  <LinkBack class="mb-4" />
+
+  <div>
+    <h1 v-if="selectedImage">Editando imagem # {{ selectedImage.id }}</h1>
+    <img v-if="imagePreview" :src="imagePreview" alt="Previsualização de imagem" />
+    <img v-else-if="selectedImage" :src="selectedImage.image" alt="Previsualização de imagem" />
   </div>
+  <ImageForm
+    :initialValues="selectedImage"
+    :backendErrors="backendErrors"
+    @submit="handleSubmit"
+    @onUpdateImagePreview="handleUpdatePreview"
+  />
 </template>

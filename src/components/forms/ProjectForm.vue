@@ -5,8 +5,7 @@ import { Message, InputText, Button } from 'primevue'
 import ToggleSwitch from 'primevue/toggleswitch'
 import MessageError from '@/components/MessageError.vue'
 import MultiSelect from 'primevue/multiselect'
-// import TinyEditor from '@/components/TinyEditor.vue'
-import TipTapEditor from './TipTapEditor.vue'
+import TipTapEditor from '@/components/TipTapEditor.vue'
 
 const props = defineProps({
   initialValues: {
@@ -160,7 +159,7 @@ const resolver = ({ values }) => {
         </label>
         <MessageError :form="$form" :backendErrors="backendErrors" fieldName="is_public" />
       </div>
-      <Button type="submit" severity="secondary" label="Submit" />
+      <Button type="submit" severity="primary" label="Submit" />
     </Form>
   </div>
 </template>
