@@ -3,7 +3,7 @@ import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { patchRequest } from '@/services/api'
 import SkillForm from '@/components/forms/SkillForm.vue'
-import { useSkillStore } from '@/stores/Skill'
+import { useSkillStore } from '@/stores/skill'
 import LinkBack from '@/components/LinkBack.vue'
 
 const route = useRoute()

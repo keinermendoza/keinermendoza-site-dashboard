@@ -1,5 +1,5 @@
 <script setup>
-import { useSkillstore } from '@/stores/skill'
+import { useSkillStore } from '@/stores/skill'
 import WrapperComponent from '@/components/WrapperComponent.vue'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
@@ -11,7 +11,7 @@ import { Button } from 'primevue'
 import IsSvg from '@/components/IsSvg.vue'
 
 // const deleteModalIsVisible = ref(false)
-const store = useSkillstore()
+const store = useSkillStore()
 // const selectedskill = ref(null)
 
 // function selectskillForDeletion(skillId) {

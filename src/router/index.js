@@ -27,7 +27,7 @@ import {
   DetailView as SkillDetail,
   CreateView as SkillCreate,
   EditView as SkillEdit,
-} from '@/views/tag'
+} from '@/views/skill'
 
 import {
   ListView as ImageList,

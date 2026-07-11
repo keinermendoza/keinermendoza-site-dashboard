@@ -3,7 +3,7 @@ import { reactive } from 'vue'
 import { Form } from '@primevue/forms'
 import { InputText, Button } from 'primevue'
 import Textarea from 'primevue/textarea'
-import ToggleSwitch from 'primevue'
+import ToggleSwitch from 'primevue/toggleswitch'
 
 import MessageError from '@/components/MessageError.vue'
 
@@ -31,7 +31,7 @@ const onFormSubmit = async ({ values }) => {
   // const payload = new FormData()
   // payload.append('description', values.description)
   // payload.append('file', imageFile.value)
-  emit('submit', values)
+  emit('onSubmit', values)
 }
 </script>
 
@@ -54,19 +54,28 @@ const onFormSubmit = async ({ values }) => {
 
     <!-- titulo -->
     <div class="flex flex-col gap-1">
-      <InputText name="title" type="text" placeholder="title" fluid />
+      <label for="title">Titulo</label>
+      <InputText id="title" name="title" type="text" placeholder="title" fluid />
       <MessageError :form="$form" :backendErrors="props?.backendErrors" fieldName="title" />
     </div>
 
-    <!-- descripção -->
+    <!-- descrição -->
     <div class="flex flex-col gap-1">
-      <Textarea name="description" v-model="formValues.description" rows="5" cols="30" />
+      <label for="description">Descrição</label>
+      <Textarea
+        id="description"
+        name="description"
+        v-model="formValues.description"
+        rows="5"
+        cols="30"
+      />
       <MessageError :form="$form" :backendErrors="props?.backendErrors" fieldName="description" />
     </div>
 
     <!-- svg -->
     <div class="flex flex-col gap-1">
-      <Textarea name="svg" v-model="formValues.svg" rows="5" cols="30" />
+      <label for="svg">SVG em texto</label>
+      <Textarea id="svg" name="svg" v-model="formValues.svg" rows="5" cols="30" />
       <MessageError :form="$form" :backendErrors="props?.backendErrors" fieldName="svg" />
     </div>
 
