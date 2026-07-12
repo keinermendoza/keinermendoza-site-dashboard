@@ -3,6 +3,7 @@
 import { ref, watch } from 'vue'
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
+import Youtube from '@tiptap/extension-youtube'
 import TipTapBtn from './TipTapBtn.vue'
 import ImageGallerySelector from './ImageGallerySelector.vue'
 import Image from '@tiptap/extension-image'
@@ -13,7 +14,14 @@ const modelValue = defineModel({
 })
 
 const editor = useEditor({
-  extensions: [StarterKit, Image],
+  extensions: [
+    StarterKit,
+    Image,
+    Youtube.configure({
+      controls: false,
+      nocookie: true,
+    }),
+  ],
   content: modelValue.value,
   onUpdate: ({ editor }) => {
     modelValue.value = editor.getHTML()
@@ -52,6 +60,18 @@ function handleInsertImage(imageObj) {
     })
     .run()
 }
+
+function addVideo() {
+  const url = prompt('Ingrese la URL de YouTube')
+
+  if (!url) return
+
+  editor.value?.commands.setYoutubeVideo({
+    src: url,
+    width: 640,
+    height: 480,
+  })
+}
 </script>
 
 <template>
@@ -63,6 +83,8 @@ function handleInsertImage(imageObj) {
     <!-- Barra de Herramientas -->
     <div v-if="editor" class="flex flex-wrap gap-2 mb-4 border-b border-gray-200 pb-2">
       <TipTapBtn @click="imageModalIsOpen = true"> Image </TipTapBtn>
+      <TipTapBtn @click="addVideo"> Agregar video </TipTapBtn>
+
       <TipTapBtn
         @click="editor.chain().focus().toggleBold().run()"
         :disabled="!editor.can().chain().focus().toggleBold().run()"

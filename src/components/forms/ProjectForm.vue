@@ -97,6 +97,13 @@ const resolver = ({ values }) => {
         <MessageError :form="$form" :backendErrors="backendErrors" fieldName="title" />
       </div>
 
+      <!-- Subtitulo -->
+      <div class="flex flex-col gap-1">
+        <label class="font-medium" for="subtitle">Subtitulo</label>
+        <InputText id="subtitle" name="subtitle" />
+        <MessageError :form="$form" :backendErrors="backendErrors" fieldName="subtitle" />
+      </div>
+
       <!-- Slug -->
       <div class="flex flex-col gap-1">
         <label class="font-medium" for="slug">Slug</label>
