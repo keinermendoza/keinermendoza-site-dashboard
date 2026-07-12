@@ -72,8 +72,9 @@ onMounted(() => {
           </div>
         </template>
       </Column>
-      <Column field="created_at" header="Cadastrado em"></Column>
-      <Column field="updated_at" header="Atualizado em"></Column>
+      <Column field="importance" header="Importância"></Column>
+      <Column field="created_at" header="Registrado"></Column>
+      <Column field="updated_at" header="Atualizado"></Column>
       <Column header="Ações">
         <template #body="slotProps">
           <div class="flex gap-2 items-center">

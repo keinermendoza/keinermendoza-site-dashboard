@@ -104,6 +104,21 @@ const resolver = ({ values }) => {
         <MessageError :form="$form" :backendErrors="backendErrors" fieldName="subtitle" />
       </div>
 
+      <!-- Importancia no ordenameto -->
+      <div class="flex flex-col gap-1">
+        <label class="font-medium" for="importance">Importância</label>
+        <InputText
+          type="number"
+          id="importance"
+          name="importance"
+          aria-describedby="help-importance-text"
+        />
+        <small id="help-importance-text"
+          >Só os 3 projetos com maior pontuação serão mostrados na tela inicial.</small
+        >
+        <MessageError :form="$form" :backendErrors="backendErrors" fieldName="importance" />
+      </div>
+
       <!-- Slug -->
       <div class="flex flex-col gap-1">
         <label class="font-medium" for="slug">Slug</label>
