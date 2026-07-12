@@ -2,7 +2,9 @@
 import FileUpload from 'primevue/fileupload'
 import { reactive, ref } from 'vue'
 import { Form } from '@primevue/forms'
-import { InputText, Button } from 'primevue'
+import { Button } from 'primevue'
+import Textarea from 'primevue/textarea'
+
 import MessageError from '@/components/MessageError.vue'
 
 const props = defineProps({
@@ -44,10 +46,10 @@ const onFormSubmit = async ({ values }) => {
     v-slot="$form"
     :initialValues="formValues"
     @submit="onFormSubmit"
-    class="flex flex-col gap-4 w-full sm:w-56"
+    class="flex flex-col gap-4 w-full sm:w-lg"
   >
     <div class="flex flex-col gap-2">
-      <label>Upload Profile Picture</label>
+      <label>Adicionar Imagem</label>
       <FileUpload
         mode="basic"
         name="file"
@@ -61,7 +63,17 @@ const onFormSubmit = async ({ values }) => {
     </div>
 
     <div class="flex flex-col gap-1">
-      <InputText name="description" type="text" placeholder="description" fluid />
+      <!-- <InputText name="description" type="text" placeholder="description" fluid /> -->
+      <label for="description">Descrição</label>
+
+      <Textarea
+        id="description"
+        name="description"
+        v-model="formValues.description"
+        rows="5"
+        cols="30"
+      />
+
       <MessageError :form="$form" :backendErrors="props?.backendErrors" fieldName="description" />
     </div>
     <Button type="submit" severity="primary" label="Submit" />

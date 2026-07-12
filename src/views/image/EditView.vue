@@ -1,11 +1,16 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { useImageStore } from '@/stores/image'
-import { useRoute } from 'vue-router'
 import { patchRequest } from '@/services/api'
 import ImageForm from '@/components/forms/ImageForm.vue'
 import LinkBack from '@/components/LinkBack.vue'
+import { useToast } from 'primevue/usetoast'
+import { baseMessage } from '@/composables/utils'
+import { useRoute, useRouter } from 'vue-router'
 
+const router = useRouter()
+
+const toast = useToast()
 const route = useRoute()
 const store = useImageStore()
 const imagePreview = ref(null)
@@ -24,7 +29,12 @@ function handleUpdatePreview(imageBlob) {
 async function handleSubmit(payload) {
   const response = await patchRequest('images/' + selectedImage.value.id, payload)
   backendErrors.value = response.error
-  if (response.success) store.update(response.data)
+  // if (response.success) store.update(response.data)
+  if (response.success) {
+    store.add(response.data)
+    toast.add({ ...baseMessage, detail: 'Imagem atualizada com sucesso' })
+    router.push({ name: 'image-gallery-list' })
+  }
 }
 </script>
 
@@ -32,7 +42,9 @@ async function handleSubmit(payload) {
   <LinkBack class="mb-4" />
 
   <div>
-    <h1 v-if="selectedImage">Editando imagem # {{ selectedImage.id }}</h1>
+    <h1 v-if="selectedImage" class="text-2xl font-medium">
+      Editando imagem # {{ selectedImage.id }}
+    </h1>
     <img v-if="imagePreview" :src="imagePreview" alt="Previsualização de imagem" />
     <img v-else-if="selectedImage" :src="selectedImage.image" alt="Previsualização de imagem" />
   </div>

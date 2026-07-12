@@ -1,7 +1,8 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 import LayoutApp from './components/LayoutApp.vue'
 import SidebarItem from './components/SidebarItem.vue'
+import Toast from 'primevue/toast'
 </script>
 
 <template>
@@ -23,5 +24,6 @@ import SidebarItem from './components/SidebarItem.vue'
     </template>
 
     <RouterView />
+    <Toast />
   </LayoutApp>
 </template>

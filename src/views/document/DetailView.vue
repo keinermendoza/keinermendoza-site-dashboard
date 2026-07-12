@@ -2,25 +2,25 @@
 import WrapperComponent from '@/components/WrapperComponent.vue'
 import { useRoute } from 'vue-router'
 import { onMounted, ref } from 'vue'
-import { useImageStore } from '@/stores/image'
+import { useDocumentStore } from '@/stores/document'
 
 const route = useRoute()
-const imageStore = useImageStore()
-const image = ref(null)
+const store = useDocumentStore()
+const document = ref(null)
 
 onMounted(async () => {
-  await imageStore.init()
-  image.value = imageStore.get(route.params.id)
+  await store.init()
+  document.value = store.get(route.params.id)
 })
 </script>
 
 <template>
-  <WrapperComponent :error="imageStore.error">
+  <WrapperComponent :error="store.error">
     <h1>Hola, me alegra verte por aqui!</h1>
     <p>mira mis codigos</p>
-    <p v-if="imageStore.isLoading">carregando</p>
+    <p v-if="store.isLoading">carregando</p>
     <code v-else>
-      {{ image }}
+      {{ document }}
     </code>
   </WrapperComponent>
 </template>

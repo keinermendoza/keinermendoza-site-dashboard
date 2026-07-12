@@ -7,7 +7,10 @@ import { postRequest } from '@/services/api'
 import ProjectForm from '@/components/forms/ProjectForm.vue'
 import ImageGallerySelector from '@/components/ImageGallerySelector.vue'
 import LinkBack from '@/components/LinkBack.vue'
+import { useToast } from 'primevue/usetoast'
+import { baseMessage } from '@/composables/utils'
 
+const toast = useToast()
 const router = useRouter()
 const store = useProjectStore()
 const tagStore = useTagStore()
@@ -32,6 +35,7 @@ async function handleSubmit(payload) {
   backendErrors.value = response.error
   if (response.success) {
     store.add(response.data)
+    toast.add({ ...baseMessage, detail: 'Projeto registrado com sucesso' })
     router.push({ name: 'project-edit', params: { id: response.data.id } })
   }
 }
@@ -40,8 +44,8 @@ async function handleSubmit(payload) {
 <template>
   <LinkBack class="mb-4" />
 
-  <div>
-    <h1>Novo Porjeto</h1>
+  <div class="mb-4">
+    <h1 class="text-2xl font-medium">Novo Projeto</h1>
   </div>
   <ProjectForm
     :backendErrors="backendErrors"

@@ -9,11 +9,7 @@ import IsSvg from '@/components/IsSvg.vue'
 import Badge from 'primevue/badge'
 import { deleteRequest } from '@/services/api'
 import DeleteModal from '@/components/DeleteModal.vue'
-// import { ref } from 'vue'
-// import { deleteRequest } from '@/services/api'
 
-// const deleteModalIsVisible = ref(false)
-// const selectedUser = ref(null)
 const store = useProjectStore()
 const selectedItem = ref(null)
 const deleteModalIsVisible = ref(false)
@@ -28,17 +24,6 @@ async function requestDeletion() {
   if (success) store.remove(selectedItem.value.id)
   deleteModalIsVisible.value = false
 }
-
-// function selectUserForDeletion(userId) {
-//   selectedUser.value = store.get(userId)
-//   deleteModalIsVisible.value = true
-// }
-
-// async function requestUserDeletion() {
-//   const { success } = await deleteRequest('users/' + selectedUser.value.id)
-//   if (success) store.remove(selectedUser.value.id)
-//   deleteModalIsVisible.value = false
-// }
 
 onMounted(() => {
   store.init()
@@ -98,7 +83,11 @@ onMounted(() => {
             <RouterLink :to="{ name: 'project-edit', params: { id: slotProps.data.id } }"
               >editar</RouterLink
             >
-            <Button label="Eliminar" @click="selectForDeletion(slotProps.data.id)" />
+            <Button
+              severity="danger"
+              label="Eliminar"
+              @click="selectForDeletion(slotProps.data.id)"
+            />
           </div>
         </template>
       </Column>
@@ -106,28 +95,5 @@ onMounted(() => {
     <DeleteModal @onDelete="requestDeletion" v-model:visible="deleteModalIsVisible">
       Tem certeza que deseja eliminar o projeto <strong>{{ selectedItem?.title }}?</strong>
     </DeleteModal>
-    <!--
-    <div class="card flex justify-center">
-      <Dialog
-        v-model:visible="deleteModalIsVisible"
-        modal
-        header="Eliminar Usuario"
-        :style="{ width: '25rem' }"
-      >
-        <span class="text-surface-500 dark:text-surface-400 block mb-8"
-          >
-        </span>
-
-        <div class="flex justify-end gap-2">
-          <Button
-            type="button"
-            label="Cancel"
-            severity="secondary"
-            @click="deleteModalIsVisible = false"
-          ></Button>
-          <Button type="button" label="Deletar" @click="requestUserDeletion()"></Button>
-        </div>
-      </Dialog>
-    </div> -->
   </WrapperComponent>
 </template>

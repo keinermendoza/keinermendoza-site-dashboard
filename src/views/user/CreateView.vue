@@ -2,9 +2,13 @@
 import { onMounted, ref } from 'vue'
 import { useUserStore } from '@/stores/user'
 import { postRequest } from '@/services/api'
-import DocumentForm from '@/components/forms/DocumentForm.vue'
+import UserForm from '@/components/forms/UserForm.vue'
 import { useRouter } from 'vue-router'
 import LinkBack from '@/components/LinkBack.vue'
+import { baseMessage } from '@/composables/utils'
+import { useToast } from 'primevue'
+
+const toast = useToast()
 const router = useRouter()
 const store = useUserStore()
 const backendErrors = ref(null)
@@ -18,6 +22,7 @@ async function handleSubmit(payload) {
   backendErrors.value = response.error
   if (response.success) {
     store.add(response.data)
+    toast.add({ ...baseMessage, detail: 'Usuario atualizado com sucesso' })
     router.push({ name: 'user-edit', params: { id: response.data.id } })
   }
 }
@@ -26,8 +31,8 @@ async function handleSubmit(payload) {
 <template>
   <LinkBack class="mb-4" />
 
-  <div>
-    <h1>Subir Novo Documento</h1>
+  <div class="mb-4">
+    <h1 class="text-2xl font-medium mb-4">Cadastrar novo Usuario</h1>
   </div>
-  <DocumentForm :backendErrors="backendErrors" @onSubmit="handleSubmit" />
+  <UserForm :backendErrors="backendErrors" @onSubmit="handleSubmit" />
 </template>

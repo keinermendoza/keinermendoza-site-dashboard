@@ -77,7 +77,11 @@ onMounted(() => {
             <RouterLink :to="{ name: 'image-gallery-edit', params: { id: slotProps.data.id } }"
               >editar</RouterLink
             >
-            <Button label="Eliminar" @click="selectImageForDeletion(slotProps.data.id)" />
+            <Button
+              severity="danger"
+              label="Eliminar"
+              @click="selectImageForDeletion(slotProps.data.id)"
+            />
           </div>
         </template>
       </Column>
@@ -101,7 +105,12 @@ onMounted(() => {
             severity="secondary"
             @click="deleteModalIsVisible = false"
           ></Button>
-          <Button type="button" label="Deletar" @click="requestImageDeletion()"></Button>
+          <Button
+            severity="danger"
+            type="button"
+            label="Deletar"
+            @click="requestImageDeletion()"
+          ></Button>
         </div>
       </Dialog>
     </div>

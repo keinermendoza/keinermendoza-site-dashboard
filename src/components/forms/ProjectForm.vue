@@ -45,6 +45,8 @@ const onFormSubmit = async ({ values }) => {
   emit('onSubmit', values)
 }
 
+console.log(props.availableTags)
+
 function generateSlug(text) {
   return text
     .toString()
@@ -74,7 +76,7 @@ const resolver = ({ values }) => {
       v-slot="$form"
       :initialValues="formValues"
       @submit="onFormSubmit"
-      class="flex flex-col gap-4 w-full"
+      class="flex flex-col gap-4 w-full sm:w-4xl"
     >
       <Message
         v-if="backendErrors && backendErrors.generalMessage"
@@ -86,7 +88,7 @@ const resolver = ({ values }) => {
       </Message>
       <!-- Titulo -->
       <div class="flex flex-col gap-1">
-        <label for="title">Titulo</label>
+        <label class="font-medium" for="title">Titulo</label>
         <InputText
           id="title"
           v-model="formValues.title"
@@ -97,7 +99,7 @@ const resolver = ({ values }) => {
 
       <!-- Slug -->
       <div class="flex flex-col gap-1">
-        <label for="slug">Slug</label>
+        <label class="font-medium" for="slug">Slug</label>
 
         <InputText
           v-model="formValues.slug"
@@ -112,15 +114,18 @@ const resolver = ({ values }) => {
 
       <div class="flex flex-col gap-1">
         <!-- categorias -->
+        <label class="font-medium" for="tags">Categorias (Tags)</label>
+
         <MultiSelect
+          id="tags"
           v-model="selectedTags"
-          :options="props.availableTags?.tags"
+          :options="props.availableTags"
           optionLabel="title"
           optionValue="id"
           filter
           placeholder="Esclhe as categorias"
           :maxSelectedLabels="5"
-          class="w-full md:w-80"
+          class="w-full"
           name="tags"
         />
         <MessageError :form="$form" :backendErrors="backendErrors" fieldName="tags" />
@@ -128,6 +133,8 @@ const resolver = ({ values }) => {
 
       <!-- Imagem -->
       <div class="flex flex-col gap-1">
+        <label class="font-medium">Imagem Principal</label>
+
         <template v-if="props?.selectedImage">
           <img
             class="w-full"
@@ -140,6 +147,7 @@ const resolver = ({ values }) => {
           <p>Seleciona Imagem</p>
         </template>
         <Button
+          severity="info"
           @click="emit('onOpenImageModal')"
           :label="props?.selectedImage ? 'Alterar Imagem' : 'Escolher Imagem'"
         />
@@ -147,13 +155,15 @@ const resolver = ({ values }) => {
       </div>
       <!-- Conteudo -->
       <div class="flex flex-col gap-1">
+        <label class="font-medium">Conteúdo</label>
+
         <TipTapEditor v-model="editorContent" />
         <MessageError :form="$form" :backendErrors="backendErrors" fieldName="content" />
       </div>
 
       <!-- Vsibilidade -->
       <div class="flex flex-col gap-1">
-        <label class="flex gap-2 items-center">
+        <label class="font-medium flex gap-2 items-center">
           <ToggleSwitch id="is_public" name="is_public" />
           <small>É público</small>
         </label>

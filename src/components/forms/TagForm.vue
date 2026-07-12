@@ -36,7 +36,7 @@ const onFormSubmit = async ({ values }) => {
     v-slot="$form"
     :initialValues="formValues"
     @submit="onFormSubmit"
-    class="flex flex-col gap-4 w-full sm:w-56"
+    class="flex flex-col gap-4 w-full sm:w-lg"
   >
     <!-- erro geral -->
     <Message
@@ -50,13 +50,21 @@ const onFormSubmit = async ({ values }) => {
 
     <!-- titulo -->
     <div class="flex flex-col gap-1">
-      <InputText name="title" type="text" placeholder="title" fluid />
+      <label for="title">Titulo</label>
+      <InputText id="title" name="title" type="text" placeholder="title" fluid />
       <MessageError :form="$form" :backendErrors="props?.backendErrors" fieldName="title" />
     </div>
 
     <!-- descripção -->
     <div class="flex flex-col gap-1">
-      <Textarea name="description" v-model="formValues.description" rows="5" cols="30" />
+      <label for="description">Descrição</label>
+      <Textarea
+        id="description"
+        name="description"
+        v-model="formValues.description"
+        rows="5"
+        cols="30"
+      />
       <MessageError :form="$form" :backendErrors="props?.backendErrors" fieldName="description" />
     </div>
 

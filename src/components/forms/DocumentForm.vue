@@ -49,10 +49,10 @@ onMounted(() => {
     v-slot="$form"
     :initialValues="formValues"
     @submit="onFormSubmit"
-    class="flex flex-col gap-4 w-full sm:w-56"
+    class="flex flex-col gap-4 w-full sm:w-lg"
   >
     <div class="flex flex-col gap-2">
-      <label>Upload Profile Picture</label>
+      <label>Adicionar PDF</label>
       <FileUpload
         mode="basic"
         name="file"
@@ -66,7 +66,8 @@ onMounted(() => {
     </div>
 
     <div class="flex flex-col gap-1">
-      <InputText name="title" type="text" placeholder="title" fluid />
+      <label for="title">Titulo</label>
+      <InputText id="title" name="title" type="text" placeholder="title" fluid />
       <MessageError :form="$form" :backendErrors="props?.backendErrors" fieldName="title" />
     </div>
 

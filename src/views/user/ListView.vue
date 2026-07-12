@@ -65,7 +65,12 @@ onMounted(() => {
             <RouterLink :to="{ name: 'user-edit', params: { id: slotProps.data.id } }"
               >editar</RouterLink
             >
-            <Button label="Eliminar" @click="selectUserForDeletion(slotProps.data.id)" />
+
+            <Button
+              severity="danger"
+              label="Eliminar"
+              @click="selectUserForDeletion(slotProps.data.id)"
+            />
           </div>
         </template>
       </Column>
@@ -89,7 +94,12 @@ onMounted(() => {
             severity="secondary"
             @click="deleteModalIsVisible = false"
           ></Button>
-          <Button type="button" label="Deletar" @click="requestUserDeletion()"></Button>
+          <Button
+            type="button"
+            severity="danger"
+            label="Deletar"
+            @click="requestUserDeletion()"
+          ></Button>
         </div>
       </Dialog>
     </div>

@@ -50,7 +50,7 @@ const onFormSubmit = async ({ valid, values }) => {
     :resolver
     :initialValues="formValues"
     @submit="onFormSubmit"
-    class="flex flex-col gap-4 w-full sm:w-56"
+    class="flex flex-col gap-4 w-full sm:w-lg"
   >
     <Message
       v-if="props?.backendErrors && props.backendErrors.generalMessage"

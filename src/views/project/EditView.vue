@@ -7,6 +7,11 @@ import { patchRequest } from '@/services/api'
 import ProjectForm from '@/components/forms/ProjectForm.vue'
 import ImageGallerySelector from '@/components/ImageGallerySelector.vue'
 import LinkBack from '@/components/LinkBack.vue'
+import { useToast } from 'primevue/usetoast'
+import { baseMessage } from '@/composables/utils'
+
+const toast = useToast()
+
 const route = useRoute()
 const router = useRouter()
 
@@ -38,6 +43,7 @@ async function handleSubmit(payload) {
   backendErrors.value = response.error
   if (response.success) {
     store.update(response.data)
+    toast.add({ ...baseMessage, detail: 'Projeto atualizado com sucesso' })
     router.push({ name: 'project-list' })
   }
 }
@@ -46,14 +52,14 @@ async function handleSubmit(payload) {
 <template>
   <LinkBack class="mb-4" />
 
-  <div>
-    <h1 v-if="project">Editando porjeto {{ project.title }}</h1>
+  <div class="mb-4">
+    <h1 v-if="project" class="text-2xl font-medium">Projeto: {{ project.title }}</h1>
   </div>
   <ProjectForm
-    v-if="project"
+    v-if="project && tagStore"
     :initialValues="project"
     :backendErrors="backendErrors"
-    :availableTags="tagStore?.data"
+    :availableTags="tagStore.data"
     :selectedImage="image"
     v-model:selectedTags="selectedTags"
     @onOpenImageModal="imagesModalIsOpen = true"

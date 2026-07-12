@@ -69,7 +69,11 @@ onMounted(() => {
             <RouterLink :to="{ name: 'document-edit', params: { id: slotProps.data.id } }"
               >editar</RouterLink
             >
-            <Button label="Eliminar" @click="selectForDeletion(slotProps.data.id)" />
+            <Button
+              severity="danger"
+              label="Eliminar"
+              @click="selectForDeletion(slotProps.data.id)"
+            />
           </div>
         </template>
       </Column>
