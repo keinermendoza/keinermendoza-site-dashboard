@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
 import { patchRequest } from '@/services/api'
 import UserForm from '@/components/forms/UserForm.vue'
 import { useUserStore } from '@/stores/user'
@@ -8,10 +7,11 @@ import LinkBack from '@/components/LinkBack.vue'
 
 import { useToast } from 'primevue/usetoast'
 import { baseMessage } from '@/composables/utils'
+import { useRoute, useRouter } from 'vue-router'
 
+const router = useRouter()
 const toast = useToast()
 const route = useRoute()
-const router = useRouter()
 const store = useUserStore()
 const instance = ref(null)
 const backendErrors = ref(null)

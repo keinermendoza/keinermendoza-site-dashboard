@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { useProjectStore } from '@/stores/project'
 import { useTagStore } from '@/stores/tag'
 import { useRoute, useRouter } from 'vue-router'
@@ -34,11 +34,14 @@ onMounted(async () => {
 })
 
 async function handleSubmit(payload) {
-  console.log('edit_view', payload)
+  // adiciona tags id
+  payload.tags = selectedTags.value
 
+  // adiciona id da imagem principal
   if (image.value) {
     payload['image_id'] = image.value.id
   }
+
   const response = await patchRequest('projects/' + project.value.id, payload)
   backendErrors.value = response.error
   if (response.success) {
