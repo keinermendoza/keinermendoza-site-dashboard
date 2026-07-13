@@ -11,8 +11,10 @@ const attrs = useAttrs()
 
 <template>
   <button
-    class="p-2 cursor-pointer rounded shadow bg-amber-100"
-    :class="{ 'bg-amber-300': props.isActive }"
+    :class="[
+      'p-2 cursor-pointer rounded shadow shadow-black',
+      props.isActive ? 'bg-amber-300' : 'bg-gray-200',
+    ]"
     v-bind="attrs"
     type="button"
   >
