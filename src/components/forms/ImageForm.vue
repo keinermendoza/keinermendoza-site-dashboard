@@ -49,7 +49,6 @@ const onFormSubmit = async ({ values }) => {
     class="flex flex-col gap-4 w-full sm:w-lg"
   >
     <div class="flex flex-col gap-2">
-      <label>Adicionar Imagem</label>
       <FileUpload
         mode="basic"
         name="file"
@@ -57,6 +56,7 @@ const onFormSubmit = async ({ values }) => {
         :maxFileSize="1000000"
         @select="handleFileChange"
         customUpload
+        :chooseButtonProps="{ severity: 'info', variant: 'outlined', label: 'Imagem' }"
       />
       <MessageError :form="$form" :backendErrors="props?.backendErrors" fieldName="file" />
       <small v-if="imageFile" class="text-green-500"> Selected: {{ imageFile.name }} </small>
@@ -76,6 +76,6 @@ const onFormSubmit = async ({ values }) => {
 
       <MessageError :form="$form" :backendErrors="props?.backendErrors" fieldName="description" />
     </div>
-    <Button type="submit" severity="primary" label="Submit" />
+    <Button type="submit" severity="primary" label="Salvar" />
   </Form>
 </template>

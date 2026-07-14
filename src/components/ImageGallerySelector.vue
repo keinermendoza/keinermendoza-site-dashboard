@@ -53,14 +53,31 @@ async function handleSubmit(payload) {
     <Dialog
       :visible="props.isOpen"
       @update:visible="emit('update:isOpen', $event)"
+      dismissableMask="true"
       modal
       header="Seleciona Imagem"
-      class="max-w-xl"
+      class="w-full max-w-6xl mx-4"
     >
       <!-- botão adicionar imagem -->
-      <div class="flex items-center gap-2">
-        <Button aria-roledescription="Adicionar nova imagem" @click="createFormIsVisible = true">
+      <div class="mb-4">
+        <Button
+          severity="info"
+          aria-describedby="help-add-image"
+          @click="createFormIsVisible = !createFormIsVisible"
+        >
           <svg
+            v-if="createFormIsVisible"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="size-4"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 15.75 7.5-7.5 7.5 7.5" />
+          </svg>
+          <svg
+            v-else
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -74,12 +91,18 @@ async function handleSubmit(payload) {
               d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
             />
           </svg>
-          <span>Adicionar nova imagem</span>
+
+          <span v-if="createFormIsVisible">Ocultar formulario</span>
+          <span v-else>Adicionar imagem</span>
         </Button>
+        <p v-if="!createFormIsVisible" class="mt-2" id="help-add-image">
+          Não encontrou a imagem que queria? Use o botão acima para adicionar uma nova imagem à
+          galeria.
+        </p>
       </div>
 
       <!-- formulario para adicionar nova imagem -->
-      <div v-if="createFormIsVisible">
+      <div v-if="createFormIsVisible" class="mb-4 border border-black/50 rounded-xl p-4">
         <img v-if="imagePreview" :src="imagePreview" alt="previzualisação de imagem" />
         <ImageForm
           :backendErrors="backendErrors"
@@ -89,16 +112,16 @@ async function handleSubmit(payload) {
       </div>
 
       <!-- galeria para seleccionar imagem -->
-      <div v-if="store?.images" class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+      <div v-if="store?.images" class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
         <div
           @click="emit('update:selectedImage', image)"
           v-for="image in store.images"
-          class="border border-solid cursor-pointer"
-          :class="props.selectedImage?.id === image.id ? 'border-red-500' : 'border-transparent'"
+          class="border-4 rounded-xl border-solid cursor-pointer"
+          :class="props.selectedImage?.id === image.id ? 'border-green-500' : 'border-transparent'"
           :key="image.id"
         >
           <img
-            class="object-cover object-center w-full h-40 max-w-full rounded-lg"
+            class="object-cover object-center w-full h-40 aspect-square max-w-full rounded-lg"
             :src="image.image"
             :alt="image.description"
           />

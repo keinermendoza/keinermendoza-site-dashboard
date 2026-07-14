@@ -191,7 +191,7 @@ const resolver = ({ values }) => {
         </label>
         <MessageError :form="$form" :backendErrors="backendErrors" fieldName="is_public" />
       </div>
-      <Button type="submit" severity="primary" label="Submit" />
+      <Button type="submit" severity="primary" label="Salvar" />
     </Form>
   </div>
 </template>
