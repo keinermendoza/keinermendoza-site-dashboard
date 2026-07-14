@@ -60,12 +60,15 @@ onMounted(() => {
       <Column header="Ações">
         <template #body="slotProps">
           <div class="flex gap-2 items-center">
-            <RouterLink :to="{ name: 'tag-detail', params: { id: slotProps.data.id } }"
+            <!-- <RouterLink :to="{ name: 'tag-detail', params: { id: slotProps.data.id } }"
               >ver</RouterLink
-            >
-            <RouterLink :to="{ name: 'tag-edit', params: { id: slotProps.data.id } }"
-              >editar</RouterLink
-            >
+            > -->
+            <Button
+              as="RouterLink"
+              :to="{ name: 'tag-edit', params: { id: slotProps.data.id } }"
+              label="Editar"
+              severity="info"
+            />
             <!-- <Button label="Eliminar" @click="selectUserForDeletion(slotProps.data.id)" /> -->
           </div>
         </template>

@@ -73,17 +73,20 @@ onMounted(() => {
         </template>
       </Column>
       <Column field="importance" header="Importância"></Column>
-      <Column field="created_at" header="Registrado"></Column>
+      <Column field="created_at" header="Criado"></Column>
       <Column field="updated_at" header="Atualizado"></Column>
       <Column header="Ações">
         <template #body="slotProps">
           <div class="flex gap-2 items-center">
-            <RouterLink :to="{ name: 'project-detail', params: { id: slotProps.data.id } }"
+            <!-- <RouterLink :to="{ name: 'project-detail', params: { id: slotProps.data.id } }"
               >ver</RouterLink
-            >
-            <RouterLink :to="{ name: 'project-edit', params: { id: slotProps.data.id } }"
-              >editar</RouterLink
-            >
+            > -->
+            <Button
+              as="RouterLink"
+              :to="{ name: 'project-edit', params: { id: slotProps.data.id } }"
+              label="Editar"
+              severity="info"
+            />
             <Button
               severity="danger"
               label="Eliminar"

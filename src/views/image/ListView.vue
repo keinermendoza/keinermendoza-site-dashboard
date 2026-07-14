@@ -66,17 +66,20 @@ onMounted(() => {
           <IsSvg :is="slotProps.data.is_public" />
         </template>
       </Column>
-      <Column field="created_at" header="Subida em"></Column>
-      <Column field="updated_at" header="Atualizada em"></Column>
+      <Column field="created_at" header="Criada"></Column>
+      <Column field="updated_at" header="Atualizada"></Column>
       <Column header="Ações">
         <template #body="slotProps">
           <div class="flex gap-2 items-center">
-            <RouterLink :to="{ name: 'image-gallery-detail', params: { id: slotProps.data.id } }"
+            <!-- <RouterLink :to="{ name: 'image-gallery-detail', params: { id: slotProps.data.id } }"
               >ver</RouterLink
-            >
-            <RouterLink :to="{ name: 'image-gallery-edit', params: { id: slotProps.data.id } }"
-              >editar</RouterLink
-            >
+            > -->
+            <Button
+              as="RouterLink"
+              :to="{ name: 'image-gallery-edit', params: { id: slotProps.data.id } }"
+              label="Editar"
+              severity="info"
+            />
             <Button
               severity="danger"
               label="Eliminar"

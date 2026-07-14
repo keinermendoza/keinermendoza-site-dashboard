@@ -53,8 +53,8 @@ onMounted(() => {
           <div v-if="slotProps.data?.svg" v-html="slotProps.data.svg"></div>
         </template>
       </Column>
-      <Column field="created_at" header="Cadastrado em"></Column>
-      <Column field="updated_at" header="Atualizado em"></Column>
+      <Column field="created_at" header="Criada"></Column>
+      <Column field="updated_at" header="Atualizada"></Column>
       <Column header="É público">
         <template #body="slotProps">
           <IsSvg :is="slotProps.data.is_public" />
@@ -63,12 +63,17 @@ onMounted(() => {
       <Column header="Ações">
         <template #body="slotProps">
           <div class="flex gap-2 items-center">
-            <RouterLink :to="{ name: 'skill-detail', params: { id: slotProps.data.id } }"
+            <!-- <RouterLink :to="{ name: 'skill-detail', params: { id: slotProps.data.id } }"
               >ver</RouterLink
-            >
-            <RouterLink :to="{ name: 'skill-edit', params: { id: slotProps.data.id } }"
-              >editar</RouterLink
-            >
+            > -->
+
+            <Button
+              as="RouterLink"
+              :to="{ name: 'skill-edit', params: { id: slotProps.data.id } }"
+              label="Editar"
+              severity="info"
+            />
+            <!-- <RouterLink>editar</RouterLink> -->
             <!-- <Button label="Eliminar" @click="selectskillForDeletion(slotProps.data.id)" /> -->
           </div>
         </template>
